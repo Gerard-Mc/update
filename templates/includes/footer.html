@@ -1,0 +1,34 @@
+{% load static %}
+<footer class="text-center shadow-extra">
+    <div class="container-fluid add-space-10px white-bg"></div>
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-lg-6 col-12 mb-1 d-flex justify-content-center">
+                <a href="{% url 'home' %}" class="nav-link nav-text-style float-left">
+                    <img id="img-mobile" class="mt-1 mb-2 col-4 mx-auto " src="{% static 'img/site-logo.png' %}"
+                        alt="Shop Logo">
+                    <h2 class="h2-style px-2">GRAPHICS DIVINE</h2>
+                </a>
+            </div>
+
+            <div class="col-lg-6 col-12 mt-4 font">
+                <h5 class="text-uppercase mb-3">Links</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{% url 'portfolio' %}?category=logo,poster,icon,banner" class="py-1 text-dark">Portfolio</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'order' %}" class="py-1 text-dark">Order</a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-1 text-dark">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="text-center p-1 white-bg lower-footer">
+        © 2021 Copyright:
+        <a class="text-dark" href="#">Graphics Divine</a>
+    </div>
+</footer>

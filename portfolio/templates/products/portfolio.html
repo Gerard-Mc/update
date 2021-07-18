@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid grey-bg height-60vh">
+  <div class="row">
+    <div class="col text-center mt-4">
+      <h1 class="h1-text-style mb-4 mt-5">Portfolio</h1>
+    </div>
+  </div>
+  <div id="portfolio-nav-wrap" class="portfolio-nav d-flex justify-content-center col-12 mb-2">
+    <ul class="portfolio-nav d-flex justify-content-center mx-auto w-100 col-lg-4 offset-lg-4 color-blue bg-white py-2 px-5 shadow-less">
+      <li id="all_link" class="mx-auto">
+        <a href="{% url 'portfolio' %}?category=logo,poster,icon,banner">&nbsp;All&nbsp;</a>
+      </li>
+      <li id="logo_link" class="mx-auto">
+        <a href="{% url 'portfolio' %}?category=logo">&nbsp;Logo&nbsp;</a>
+      </li>
+      <li id="poster_link" class="mx-auto">
+        <a href="{% url 'portfolio' %}?category=poster">&nbsp;Poster&nbsp;</a>
+      </li>
+      <li id="icon_link" class="mx-auto">
+        <a href="{% url 'portfolio' %}?category=icon">&nbsp;Icon&nbsp;</a>
+      </li>
+      <li id="banner_link" class="mx-auto">
+        <a href="{% url 'portfolio' %}?category=banner">&nbsp;Banner&nbsp;</a>
+      </li>
+    </ul>
+    <div class="btn-group dropleft" style="position: absolute; right: 10px; margin-top: 43px; z-index: 2;">
+      <button type="button"
+        class="btn btn-secondary dropdown-toggle btn-sm font-weight-bold button-style color-blue bg-white px-3 shadow-less"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if category_sort_display == "Lineitem_total DESC" %}
+        Price DESC
+        {% elif  category_sort_display == "Lineitem_total ASC" %}
+        Price ASC
+        {% else %}
+        {{ category_sort_display }}
+        {% endif %}
+      </button>
+      <div class="dropdown-menu button-style">
+        <a class="dropdown-item color-blue"
+          href="{% url 'portfolio' %}?sort=lineitem_total&category={{ category }}&direction=asc">Price ASC</a>
+        <a class="dropdown-item color-blue"
+          href="{% url 'portfolio' %}?sort=lineitem_total&category={{ category }}&direction=desc">Price DESC</a>
+        <a class="dropdown-item color-blue"
+          href="{% url 'portfolio' %}?sort=complexity&category={{ category }}&direction=asc">Complexity ASC</a>
+        <a class="dropdown-item color-blue"
+          href="{% url 'portfolio' %}?sort=complexity&category={{ category }}&direction=desc">Complexity DESC</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1 p-5">
+      <div class="row">
+        {% for product in products %}
+        {% if product.display_in_portfolio == True %}
+        <div id="product-image-container"
+          class="border-box col-sm-6 col-md-6 col-lg-4 col-xl-3 white-bg p-4 d-flex align-items-center justify-content-center shadow">
+          {% if product.image %}
+          <div data-toggle="modal" data-target="#{{ product.name}}{{ product.id }}">
+            <img class="img-fluid" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.friendly_name }}" />
+          </div>
+          {% else %}
+          <div data-toggle="modal" data-target="#{{ product.name}}{{ product.id }}">
+            <img class="img-fluid" src="{% static 'img/no-image.jpg' %}" alt="{{ product.friendly_name }}" />
+          </div>
+          {% endif %}
+          <div class="modal" id="{{ product.name }}{{ product.id }}" role="dialog">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">
+                    <strong>{{ product.friendly_name|title }}</strong>
+                  </h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  {% if product.image %}
+                  <img class="img-fluid px-5" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.friendly_name }}" />
+                  {% endif %}
+                  <br>
+                  <br>
+                  <h5 class="modal-title">User Description</h5>
+                  <p>{{ product.user_description }}</p>
+                  <p><strong>Price:</strong> {{ product.lineitem_total }}</p>
+                  <div class="modal-footer p-0">
+                    <a href="{% url 'order' %}"  type="button" class="btn btn-dark mt-3 pink-bg border-none">Order Your Own</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+  var active = `{{ active_category }}` + "_link"
+  document.getElementById(active).classList.add("active_li");
+</script>
+{% endblock %}

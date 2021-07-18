@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid border-top">
+  {% if request.user.is_authenticated %}
+  <form class="form col-lg-4 offset-lg-4 button-style p-5 border-box shadow bg-white my-5"
+    action="{% url 'add_to_cart' %}" method="POST">
+    <h1 class="h1-text-style mb-0 bold-font text-center">Order Form</h1>
+    {% if order_page_elements_display == True %}
+    <div class="container-fluid mt-3">
+      <p class="text-center"><a class="color-pink" href="{% url 'view_cart' %}"><u>Proceed to cart</u></a> or make
+        another order.</p>
+    </div>
+    {% endif %}
+    <hr>
+    <p>Please describe how you would like the product to look in the fields below</p>
+    {% csrf_token %}
+    {% for input in form %}
+    <div class="form-group">
+      <label class="d-block" for="{{ field.auto_id }}">{{ input.label }}</label>
+      <div class="form-check form-check-inline">
+        {{ input }}
+      </div>
+    </div>
+    {% endfor %}
+    <hr>
+    <br>
+    <h6 class="d-block font-weight-bold">Total: $<span id="total_value">0.00</span></h6>
+    <br>
+    <button type="submit" class="btn btn-primary mb-2 pink-bg border-none font">Add to Cart</button>
+  </form>
+
+  {% else %}
+
+  <div class="height-60vh row d-flex justify-content-center align-items-center">
+    <p><a href="{% url 'account_login' %}">Login</a> or <a href="{% url 'account_signup' %}">register</a> to order a
+      product.</p>
+
+
+  </div>
+  {% endif %}
+</div>
+
+<script>
+  var category = document.getElementById('category');
+  var complexity = document.getElementById('complexity');
+  var variations = document.getElementById('variations');
+  var category_value = 0.00;
+  var variations_value = 1.00;
+  var grand_total = 0.00;
+
+  function total() {
+    // Calculate item type value
+    if (category.value == 1) {
+      category_value = 100.00;
+    }
+
+    else if (category.value == 2) {
+      category_value = 250.00;
+    }
+
+    else if (category.value == 3) {
+      category_value = 50.00;
+    }
+
+    else if (category.value == 4) {
+      category_value = 200.00;
+    }
+
+    else {
+      category_value = 0.00;
+    }
+
+    // Calculate variation value
+    if (variations.value == "1.00") {
+      variations_value = 1.00;
+    }
+
+    else if (variations.value == "1.25") {
+      variations_value = 1.25;
+    }
+
+    else if (variations.value == "1.5") {
+      variations_value = 1.5;
+    }
+
+    else if (variations.value == "1.75") {
+      variations_value = 1.75;
+    }
+
+    else {
+      variations_value = 1.00;
+
+    }
+
+    if (category_value > 0) {
+      if (document.getElementById('fast_delivery').value == "False") {
+        grand_total = category_value * variations_value * complexity.value;
+        grand_total = (grand_total).toFixed(2);
+      }
+      else if (document.getElementById('fast_delivery').value == "True") {
+        grand_total = category_value * variations_value * complexity.value * 1.15;
+        grand_total = (grand_total).toFixed(2);
+      }
+    }
+
+    else {
+      grand_total = 0.00;
+      grand_total = (grand_total).toFixed(2);
+    }
+
+    document.getElementById("total_value").innerText = "" + grand_total + "";
+  }
+</script>
+{% endblock %}

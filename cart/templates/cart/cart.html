@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="container-fluid height-60vh">
+    <div class="container-fluid col-10 offset-1 bold-font">
+        <h1 class="text-left font mt-5 mb-5">Cart</h1>
+    </div>
+    <div class="container-fluid col-10 offset-1 bg-white p-5 button-style shadow">
+       
+        <h3 class="">Items: {{ product_count }}</h3>
+        <h3 class="">Total: &euro;{{ total }}</h3>
+    </div>
+    <div class="container-fluid col-10 offset-1 my-4 button-style">
+        <button  onclick="window.location.href='{% url 'order' %}'" class="btn blue-bg color-white bold-font font shadow-extra">Return to order</button>
+        <button onclick="window.location.href='{% url 'checkout' %}'" class="btn pink-bg color-white bold-font font shadow-extra border-none">Proceed to payment</button>
+    </div>
+
+    {% for item in cart_items %}
+    <div class="container mb-5 col-10 offset-1 bg-white p-5 button-style shadow">
+        <hr>
+        <h3>
+        {% if  item.category == "1" %}
+        Logo
+        {% elif item.category == "2" %}
+        Poster
+        {% elif item.category == "3" %}
+        Icon
+        {% else %}
+        Banner
+        {% endif %}
+        </h3>
+        
+        <p>Complexity Level:<strong> {% if  item.complexity == "1.0" %}
+            Standard
+            {% elif item.complexity == "1.25" %}
+            Advanced
+            {% else %}
+            Complex
+            {% endif %}</strong></p>
+        <p>Variations: <strong>
+        {% if item.variations == "1.0" %}
+        1
+        {% elif item.variations == "1.25" %}
+        2
+        {% elif item.variations == "1.5" %}
+        3
+        {% else %}
+        4
+        {% endif %}
+    </strong>
+        </p>
+        <p>Description: {{ item.user_description }}</p>
+        {% if  item.item_type == "True" %}
+        <p>Fast Delivery: <strong>Yes</strong></p>
+        {% else %}
+        <p>Fast Delivery: <strong>No</strong></p>
+        {% endif %}
+        <p>Subtotal: <strong>&euro;{{ item.price }}</strong></p>
+        <form class="form" action="{% url 'remove_from_cart' %}" method="POST">
+            {% csrf_token %}
+            <textarea name="id" style="display:none;">{{ item.id }}</textarea>
+            <br>
+            <button type="submit" class="btn btn-primary pink-bg font border-none shadow-extra">Remove</button>
+          </form>
+    </div>
+    
+    {% endfor %}
+</section>
+{% endblock %}

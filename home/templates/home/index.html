@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section id="home-header" class="container-fluid">
+    <div id="home-carousel" class="carousel slide carousel-fade" data-interval="5000" data-ride="carousel">
+        <ul class="carousel-indicators ">
+            <li data-target="#home-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#home-carousel" data-slide-to="1"></li>
+            <li data-target="#home-carousel" data-slide-to="2"></li>
+            <li data-target="#home-carousel" data-slide-to="3"></li>
+        </ul>
+        <div class="carousel-inner h-100">
+            <div class="carousel-item carousel-item-1 active">
+                <div class="float-left col-7 col-sm-6 carousel-item-image">
+                    <div class="carousel-image-animation-cover"></div>
+                </div>
+                <div class="carousel-caption float-right text-right">
+                    <p><span class="header">DESIGN SITE<br>A GRAPHICS SHOP<br>TO SELL
+                            GRAPHICS WORK</span></p>
+                    <div class="button-wrap float-right">
+                        <div class="carousel-button-animation-cover carousel-button ">xxxxx xxxxx</div>
+                        <a href="#" class="carousel-button" role="button" aria-pressed="true">ORDER
+                            DESIGN</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item carousel-item-2">
+                <div class="float-right col-8  col-sm-6 carousel-item-image">
+                    <div
+                        class="carousel-image-animation-cover-vertical d-none d-sm-block col-10 col-sm-10 col-lg-9 mx-auto">
+                    </div>
+                </div>
+                <div class="carousel-caption float-left text-left ">
+                    <p><span class="header">MILESTONE 4<br>A GRAPHICS DESIGN<br>WEBSITE
+                            FOR A PORTFOLIO</span></p>
+                    <div class="button-wrap float-left">
+                        <div class="carousel-button-animation-cover carousel-button ">xxxxx xxxxx</div>
+                        <a href="#" class="carousel-button" role="button" aria-pressed="true">ORDER
+                            DESIGN</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item carousel-item-3">
+                <div class="float-left col-8 col-sm-6 carousel-item-image">
+                    <div class="carousel-image-animation-cover"></div>
+                </div>
+                <div class="carousel-caption float-right text-right">
+                    <p><span class="header">USE THIS<br>SITE TO SELL<br>YOUR GRAPHICS
+                        </span></p>
+                    <div class="button-wrap float-right">
+                        <div class="carousel-button-animation-cover carousel-button ">xxxxx xxxxx</div>
+                        <a href="#" class="carousel-button" role="button" aria-pressed="true">ORDER
+                            DESIGN</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item carousel-item-4">
+                <div class="float-right col-sm-7 carousel-item-image">
+                    <div class="carousel-image-animation-cover-vertical d-none d-sm-block col-12 col-sm-11 mx-auto">
+                    </div>
+                </div>
+                <div class="carousel-caption float-left text-left ">
+                    <p><span class="header">MILESTONE 4<br>A GRAPHICS DESIGN<br>WEBSITE
+                            FOR A PORTFOLIO</span></p>
+                    <div class="button-wrap float-left">
+                        <div class="carousel-button-animation-cover carousel-button ">xxxxx xxxxx</div>
+                        <a href="#" class="carousel-button" role="button" aria-pressed="true">ORDER
+                            DESIGN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev d-none d-md-flex" href="#home-carousel" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next d-none d-md-flex" href="#home-carousel" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+</section>
+
+<section id="home-about-section" class="row white-bg col-10 offset-1 my-5 py-5 font">
+    <div class="col-lg-6  col-12 float-left">
+        <h1 class="h2-style white-bg color-pink">GRAPHICS<span class="color-blue">DIVINE</span></h1>
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+            deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="col-lg-6 offset-lg-0 col-12 float-right">
+        <img class="img-fluid col-12 float-right d-none d-lg-block p-1 w-100 blue-pink-gradient-bg" alt="multiple logos"
+            src="{% static 'img/slider-img-3.jpg' %}">
+        <a href="#" class="color-white pink-bg py-1 px-2 float-left mt-3 " aria-pressed="true">ORDER DESIGN</a>
+    </div>
+</section>
+
+{% endblock %}

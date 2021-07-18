@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid col-10 offset-1 bg-white p-5 button-style shadow font my-5 height-60vh">
+    <div>
+                <h2 class="font mb-1 text-center">Thank You</h2>
+                <hr class="w-50">
+                <p class="text-center ">Your order information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
+                
+             </div>
+        
+            <div class="container mb-0 pb-0 col-12 bg-white p-3 button-style">
+                <h2 class="font mb-3">Order Details</h2>
+
+                        <p class="overflow"><strong>Order Number: </strong> {{ order.order_number }}</p>
+                        <p><strong>Order Date: </strong> {{ order.date }}</p>
+                        <p><strong>Full Name: </strong> {{ order.full_name }}</p>
+                        <p><strong>Address 1: </strong> {{ order.street_address1 }}</p>
+                        {% if order.street_address2 %}
+                        <p><strong>Address 2: </strong> {{ order.street_address2 }}</p>
+                        {% endif %}
+                        {% if order.county %}
+                        <p><strong>County: </strong> {{ order.county }}</p>
+                        {% endif %}
+                        <p><strong>Town or City: </strong> {{ order.town_or_city }}</p>
+                        {% if order.postcode %}
+                        <p><strong>Post Code: </strong> {{ order.postcode }}</p>
+                        {% endif %}
+                        <p><strong>Country: </strong> {{ order.country }}</p>
+                        <p><strong>Phone Number: </strong> {{ order.phone_number }}</p>
+                        <p><strong>Order Total: </strong> &euro;{{ order.grand_total }}</p>
+                    </div>
+                    
+                    <div class="container mb-5 mt-0 col-12 bg-white p-3 pt-0 button-style">
+                        <h2 class="font mb-1">Items</h2>
+                        {% for item in order.lineitems.all %}
+                         
+          
+               
+                <hr class="w-50 ml-0">
+                <h4>
+                {% if  item.category == "1" %}
+                Logo
+                {% elif item.category == "2" %}
+                Poster
+                {% elif item.category == "3" %}
+                Icon
+                {% else %}
+                Banner
+                {% endif %}
+                </h4>
+                
+                <p>Complexity Level:<strong> {% if  item.complexity == "1.0" %}
+                    Standard
+                    {% elif item.complexity == "1.25" %}
+                    Advanced
+                    {% else %}
+                    Complex
+                    {% endif %}</strong></p>
+                <p>Variations: <strong>
+                {% if item.variations == "1.0" %}
+                1
+                {% elif item.variations == "1.25" %}
+                2
+                {% elif item.variations == "1.5" %}
+                3
+                {% else %}
+                4
+                {% endif %}
+            </strong>
+                </p>
+                <p>Description: {{ item.user_description }}</p>
+                {% if  item.item_type == "True" %}
+                <p>Fast Delivery: <strong>Yes</strong></p>
+                {% else %}
+                <p>Fast Delivery: <strong>No</strong></p>
+                {% endif %}
+                <p>Item Price: <strong>&euro;{{ item.lineitem_total }}</strong></p>
+                            
+                            {% endfor %}
+                        </div>
+           
+                    </div> 
+  
+{% endblock %}

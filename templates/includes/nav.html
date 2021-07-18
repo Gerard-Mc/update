@@ -1,0 +1,26 @@
+{% load static %}
+<nav class="navbar navbar-light bg-dark navbar-expand-lg col-12 white-bg p-0 curve-top shadow">
+    <a href="{% url 'home' %}" class="nav-link nav-text-style float-left d-lg-none">
+        <img id="img-mobile" class="my-1 col-4 float-left" src="{% static 'img/site-logo.png' %}" alt="Shop Logo">
+        <h2 class="h2-style color-pink float-right ">GRAPHICS<span class="color-blue">DIVINE</span></h2>
+    </a>
+
+    <button class="navbar-toggler grey-bg" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse w-auto mx-auto col-md-6 offset-md-3 ">
+        <ul class="navbar-nav w-auto mx-auto">
+            <li class="nav-item">
+                <a class="logo-font font-weight-bold nav-link lower-nav-text-style mx-3" href="{% url 'order' %}" id="nav-order"
+                    aria-haspopup="true" aria-expanded="false">Order</a>
+            </li>
+            <li class="nav-item">
+                <a class="logo-font font-weight-bold nav-link lower-nav-text-style mx-3" href="{% url 'portfolio' %}?category=logo,poster,icon,banner" id="nav-portfolio"
+                    aria-haspopup="true" aria-expanded="false"><span
+                        class="d-none d-lg-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Portfolio</span><span
+                        class="d-lg-none">Portfolio</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
